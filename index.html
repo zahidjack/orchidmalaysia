@@ -1,45 +1,164 @@
-<!-- Buy Now Button -->
-<a href="#" class="btn" onclick="openForm()" style="background-color: #1e88e5; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;">ဝယ်ယူရန်</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orchid Malaysia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #005baa;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            margin: 10px;
+            width: 300px;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+        .product h3 {
+            margin: 10px 0;
+        }
+        .product p {
+            font-size: 18px;
+            color: #28a745;
+        }
+        .product button {
+            background-color: #005baa;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .product button:hover {
+            background-color: #004080;
+        }
+        .modal, .payment {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content, .payment-content {
+            background: #fff;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        input, textarea {
+            width: 90%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .close {
+            color: red;
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
 
-<!-- Hidden Form Modal -->
-<div id="orderForm" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:999; display:flex; justify-content:center; align-items:center;">
-  <div style="background:white; padding:30px; border-radius:10px; width:90%; max-width:400px;">
-    <h2>ပစ္စည်း မှာယူရန်</h2>
-    <form onsubmit="showPayment(); return false;">
-      <label>နာမည်:</label><br>
-      <input type="text" name="name" required style="width:100%; padding:10px; margin:10px 0;"><br>
-      
-      <label>ဖုန်းနံပါတ်:</label><br>
-      <input type="tel" name="phone" required style="width:100%; padding:10px; margin:10px 0;"><br>
-      
-      <label>ပို့ဆောင်ရန် လိပ်စာ:</label><br>
-      <textarea name="address" required style="width:100%; padding:10px; margin:10px 0;"></textarea><br>
-      
-      <button type="submit" style="background:#27ae60; color:white; padding:10px 20px; border:none; border-radius:5px;">ဆက်လက်ရန်</button>
-      <button type="button" onclick="closeForm()" style="margin-left:10px;">ပိတ်မယ်</button>
-    </form>
-  </div>
+<header>Orchid Malaysia</header>
+
+<div class="container">
+    <div class="product">
+        <img src="https://i.ibb.co/g9WwMZ4/D1838-B2-D-8-E8-B-44-A7-B2-FE-6-B55-A548596-A.webp" alt="Ramsha Dress">
+        <h3>Ramsha</h3>
+        <p>360,000 MMK</p>
+        <button onclick="openForm('Ramsha', '360000')">Buy Now</button>
+    </div>
+
+    <div class="product">
+        <img src="https://i.ibb.co/f0f53R3/ECA73DF6-D51-F-4576-835-F-10-C7-C5588-FE8.webp" alt="Party Wear">
+        <h3>Party Wear</h3>
+        <p>380,000 MMK</p>
+        <button onclick="openForm('Party Wear', '380000')">Buy Now</button>
+    </div>
 </div>
 
-<!-- Payment Section -->
-<div id="paymentSection" style="display:none; text-align:center; margin-top:20px;">
-  <h2>KBZ Pay ဖြင့် ငွေပေးချေရန်</h2>
-  <img src="/mnt/data/599FCE97-35FF-4262-91CD-EA0E5D337A78.jpeg" alt="KBZ Pay QR" style="width:250px; margin:20px 0; border:1px solid #ddd; padding:10px;">
-  <p>ငွေပမာဏ: <strong>၃၈၀,၀၀၀ MMK</strong></p>
-  <p>KBZ Pay နာမည်: <strong>Nay Zar Thein</strong></p>
-  <p>ဖုန်းနံပါတ်: <strong>09-777581733</strong></p>
-  <p>ငွေလွှဲပြီးပါက ဖုန်းမှ ပြန်လည်အကြောင်းကြားပါ။</p>
+<!-- Shipping Form Modal -->
+<div class="modal" id="orderForm">
+    <div class="modal-content">
+        <span class="close" onclick="closeForm()">&times;</span>
+        <h2>Shipping Form</h2>
+        <form id="shippingForm">
+            <input type="text" id="name" placeholder="Name" required><br>
+            <input type="text" id="phone" placeholder="Phone Number" required><br>
+            <textarea id="address" placeholder="Shipping Address" required></textarea><br>
+            <input type="hidden" id="product">
+            <input type="hidden" id="price">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="payment" id="paymentSection">
+    <div class="payment-content">
+        <span class="close" onclick="closePayment()">&times;</span>
+        <h2>Scan to Pay</h2>
+        <img src="https://i.ibb.co/GvLT0Wz/599-FCE97-35-FF-4262-91-CD-EA0-E5-D337-A78.jpg" alt="KBZ Pay QR" width="250">
+        <p>Pay with KBZPay (Nay Zar Thein)</p>
+        <p>Phone: 09-777581733</p>
+    </div>
 </div>
 
 <script>
-function openForm() {
-  document.getElementById('orderForm').style.display = 'flex';
-}
-function closeForm() {
-  document.getElementById('orderForm').style.display = 'none';
-}
-function showPayment() {
-  document.getElementById('orderForm').style.display = 'none';
-  document.getElementById('paymentSection').style.display = 'block';
-}
+    function openForm(product, price) {
+        document.getElementById('orderForm').style.display = 'flex';
+        document.getElementById('product').value = product;
+        document.getElementById('price').value = price;
+    }
+
+    function closeForm() {
+        document.getElementById('orderForm').style.display = 'none';
+    }
+
+    function closePayment() {
+        document.getElementById('paymentSection').style.display = 'none';
+    }
+
+    document.getElementById('shippingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('orderForm').style.display = 'none';
+        document.getElementById('paymentSection').style.display = 'flex';
+        // အော်ဒါအချက်အလက်ကို Email ပို့ချင်ရင် extra script ထပ်ထည့်ရပါမယ်
+    });
 </script>
+
+</body>
+</html>
