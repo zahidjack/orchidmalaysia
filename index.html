@@ -1,120 +1,45 @@
-<!DOCTYPE html>
-<html lang="my">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rangoon Clothing | Products</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background-color: #f2f2f2;
-      padding: 20px;
-    }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-    .product-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: 0.3s;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
-    .product-image img {
-      width: 100%;
-      height: auto;
-    }
-    .product-info {
-      padding: 20px;
-    }
-    .product-info h2 {
-      font-size: 22px;
-      margin: 10px 0;
-    }
-    .price {
-      font-size: 20px;
-      color: #d35400;
-      margin: 10px 0;
-    }
-    .description {
-      font-size: 15px;
-      color: #555;
-      margin-bottom: 15px;
-    }
-    .promo {
-      background: #fef5e7;
-      border-left: 4px solid #f5b041;
-      padding: 10px;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      background: #27ae60;
-      color: white;
-      padding: 10px 18px;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-  </style>
-</head>
+<!-- Buy Now Button -->
+<a href="#" class="btn" onclick="openForm()" style="background-color: #1e88e5; padding: 10px 20px; color: white; border-radius: 5px; text-decoration: none;">ဝယ်ယူရန်</a>
 
-<body>
-
-<h1 style="text-align:center; color:#333;">Rangoon Clothing | Collection</h1>
-
-<div class="product-grid">
-
-  <!-- Product 1 -->
-  <div class="product-card">
-    <div class="product-image">
-      <img src="YOUR_RAMSHA_IMAGE_LINK" alt="Ramsha Dress">
-    </div>
-    <div class="product-info">
-      <h2>Ramsha Embroidered Luxury Lawn</h2>
-      <div class="price">၃၆၀,၀၀၀ MMK</div>
-      <div class="description">
-        - Premium Net Dupatta<br>
-        - Heavy Embellished Shirt<br>
-        - Comfortable Cotton Trouser
-      </div>
-      <div class="promo">
-        ပရိုမိုးရှင်းကုဒ်: <strong>RAMSHA10</strong><br>
-        (၁၀% လျှော့စျေး)
-      </div>
-      <a href="#" class="btn">ဝယ်ယူရန်</a>
-    </div>
+<!-- Hidden Form Modal -->
+<div id="orderForm" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:999; display:flex; justify-content:center; align-items:center;">
+  <div style="background:white; padding:30px; border-radius:10px; width:90%; max-width:400px;">
+    <h2>ပစ္စည်း မှာယူရန်</h2>
+    <form onsubmit="showPayment(); return false;">
+      <label>နာမည်:</label><br>
+      <input type="text" name="name" required style="width:100%; padding:10px; margin:10px 0;"><br>
+      
+      <label>ဖုန်းနံပါတ်:</label><br>
+      <input type="tel" name="phone" required style="width:100%; padding:10px; margin:10px 0;"><br>
+      
+      <label>ပို့ဆောင်ရန် လိပ်စာ:</label><br>
+      <textarea name="address" required style="width:100%; padding:10px; margin:10px 0;"></textarea><br>
+      
+      <button type="submit" style="background:#27ae60; color:white; padding:10px 20px; border:none; border-radius:5px;">ဆက်လက်ရန်</button>
+      <button type="button" onclick="closeForm()" style="margin-left:10px;">ပိတ်မယ်</button>
+    </form>
   </div>
-
-  <!-- Product 2 (Party Wear) -->
-  <div class="product-card">
-    <div class="product-image">
-      <img src="YOUR_PARTYWEAR_IMAGE_LINK" alt="Party Wear Dress">
-    </div>
-    <div class="product-info">
-      <h2>Party Wear Designer Collection</h2>
-      <div class="price">၃၈၀,၀၀၀ MMK</div>
-      <div class="description">
-        - Exclusive Party Wear Gown<br>
-        - Heavy Embroidered Black Net<br>
-        - Premium Handmade Detailing
-      </div>
-      <div class="promo">
-        ပရိုမိုးရှင်းကုဒ်: <strong>PARTY10</strong><br>
-        (၁၀% လျှော့စျေး)
-      </div>
-      <a href="#" class="btn">ဝယ်ယူရန်</a>
-    </div>
-  </div>
-
 </div>
 
-</body>
-</html>
+<!-- Payment Section -->
+<div id="paymentSection" style="display:none; text-align:center; margin-top:20px;">
+  <h2>KBZ Pay ဖြင့် ငွေပေးချေရန်</h2>
+  <img src="/mnt/data/599FCE97-35FF-4262-91CD-EA0E5D337A78.jpeg" alt="KBZ Pay QR" style="width:250px; margin:20px 0; border:1px solid #ddd; padding:10px;">
+  <p>ငွေပမာဏ: <strong>၃၈၀,၀၀၀ MMK</strong></p>
+  <p>KBZ Pay နာမည်: <strong>Nay Zar Thein</strong></p>
+  <p>ဖုန်းနံပါတ်: <strong>09-777581733</strong></p>
+  <p>ငွေလွှဲပြီးပါက ဖုန်းမှ ပြန်လည်အကြောင်းကြားပါ။</p>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById('orderForm').style.display = 'flex';
+}
+function closeForm() {
+  document.getElementById('orderForm').style.display = 'none';
+}
+function showPayment() {
+  document.getElementById('orderForm').style.display = 'none';
+  document.getElementById('paymentSection').style.display = 'block';
+}
+</script>
