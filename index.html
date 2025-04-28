@@ -1,36 +1,45 @@
-<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rangoon Clothing Clone</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Rangoon</div>
+      <ul class="nav-links">
+        <li><a href="#">All Products</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Best Selling</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+      <div class="search">
+        <input type="text" placeholder="Search..." />
+        <button>Find</button>
+      </div>
+    </nav>
+  </header>
 
-<script>
-    (function(){
-        emailjs.init("YOUR_USER_ID"); // မင်းရဲ့ emailjs user ID ထည့်မယ်
-    })();
+  <main>
+    <section class="hero">
+      <img src="hero-image.jpg" alt="Hero Image" />
+    </section>
 
-    function sendEmail() {
-        const formData = new FormData();
-        formData.append("name", document.getElementById('name').value);
-        formData.append("phone", document.getElementById('phone').value);
-        formData.append("address", document.getElementById('address').value);
-        formData.append("product", document.getElementById('product').value);
-        formData.append("price", document.getElementById('price').value);
-        
-        const fileInput = document.getElementById('screenshot');
-        if(fileInput.files.length > 0) {
-            formData.append("screenshot", fileInput.files[0]);
-        }
+    <section class="products">
+      <h2>New Arrivals</h2>
+      <div class="product-list">
+        <!-- Product items will go here -->
+      </div>
+    </section>
+  </main>
 
-        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
-        .then(function() {
-            alert('Order submitted successfully!');
-            window.location.reload();
-        }, function(error) {
-            console.log('FAILED...', error);
-            alert('Order failed, please try again.');
-        });
-    }
-</script><!-- Screenshot Upload & Done -->
-<div id="uploadSection" style="display:none; text-align:center; margin-top:20px;">
-    <h3>ငွေလွှဲ Screenshot တင်ပါ</h3>
-    <input type="file" id="screenshot" accept="image/*" style="margin:10px;">
-    <br>
-    <button onclick="sendEmail()" style="background:#27ae60; color:white; padding:10px 20px; margin-top:10px;">Done</button>
-</div>
+  <footer>
+    <p>&copy; 2025 Rangoon Clothing. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
